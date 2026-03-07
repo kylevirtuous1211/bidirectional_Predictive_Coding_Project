@@ -1,0 +1,12 @@
+[submodule "backprop-alts"]
+	path = backprop-alts
+	url = https://github.com/LumenPallidium/backprop-alts.git
+[submodule "eligibility_propagation"]
+	path = eligibility_propagation
+	url = https://github.com/IGITUGraz/eligibility_propagation.git
+[submodule "pc_error_optimization"]
+	path = pc_error_optimization
+	url = https://github.com/cgoemaere/pc_error_optimization.git
+[submodule "pcax"]
+	path = pcax
+	url = https://github.com/liukidar/pcax.git
