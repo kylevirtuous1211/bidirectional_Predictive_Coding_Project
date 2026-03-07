@@ -1,0 +1,19 @@
+# Data and Weights
+data/
+bPC_training/checkpoint/*.pth
+*.pth
+
+# Visualizations (optional to keep or exclude, usually exclude from git if many)
+# bPC_training/visualization/*.png
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv
+venv/
+ENV/
+
+# OS
+.DS_Store
+.ipynb_checkpoints/
