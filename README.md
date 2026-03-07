@@ -13,24 +13,24 @@ Ensure you have the `tokenunify` conda environment or a similar environment with
 - tqdm
 
 ### Training the Model
-To start the training on MNIST using DeepSpeed acceleration:
+To start the training on a specific dataset (e.g., `mnist` or `fashion`):
 
 ```bash
 export PYTHONPATH=$PYTHONPATH:$(pwd)/backprop-alts
-deepspeed train_bpc.py --epochs 3
+deepspeed train_bpc.py --dataset fashion --epochs 20
 ```
 
 ### Evaluation
-To evaluate the best checkpoint:
+To evaluate the best checkpoint for a specific dataset:
 
 ```bash
 export PYTHONPATH=$PYTHONPATH:$(pwd)/backprop-alts
-python train_bpc.py --evaluate --load bPC_training/checkpoint/bpc_best.pth
+python train_bpc.py --dataset fashion --evaluate --load bPC_training/checkpoint/fashion/bpc_best.pth
 ```
 
 ## 📊 Visualizing Results
-After each epoch, a joint visualization plot is saved in `bPC_training/visualization/joint_epoch_X.png`. 
-The unified loss plot is saved at `bPC_training/visualization/loss_plot.png`.
+After each epoch, a joint visualization plot is saved in `bPC_training/visualization/<dataset>/joint_epoch_X.png`. 
+The unified loss plot is saved at `bPC_training/visualization/<dataset>/loss_plot.png`.
 
 The plot includes:
 1. **Original Image**: Input from the dataset.
