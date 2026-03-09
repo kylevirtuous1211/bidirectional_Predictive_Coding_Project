@@ -23,8 +23,8 @@ try:
     # and add stabilization measures (Weight Decay, Gradient Clipping, Decoupled LR).
     def patched_update_backward(self, error, x, lr=0.01):
         # Hyperparameters for stabilization
-        BACKWARD_WD = 1e-4      # Weight Decay (forgetting factor)
-        GRAD_CLIP = 0.05        # Local gradient clipping
+        BACKWARD_WD = 1e-7      # Reduced: 1e-4 was too strong for internal iterations
+        GRAD_CLIP = 0.1         # Relaxed slightly
         BACKWARD_LR_MULT = 0.5  # Decoupled lower LR for backward pass
         
         batch_size = x.shape[0]
@@ -42,8 +42,8 @@ try:
 
     # Fix: Also add stabilization to the forward pass
     def patched_update_forward(self, error, x, lr=0.01):
-        FORWARD_WD = 1e-4
-        GRAD_CLIP = 0.05
+        FORWARD_WD = 1e-7       # Reduced: 1e-4 was too strong
+        GRAD_CLIP = 0.1         # Relaxed slightly
         batch_size = x.shape[0]
         dW = torch.einsum("bi,bj->ji", x, error) / batch_size
         dW = torch.clamp(dW, -GRAD_CLIP, GRAD_CLIP)
@@ -60,8 +60,8 @@ except ImportError as e:
 # Training Configuration
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 BATCH_SIZE = 64
-EPOCHS = 5
-LR = 0.0005 # Lower LR for better stability with Hebbian updates
+EPOCHS = 20
+LR = 0.001 # Restored LR
 IN_DIM = 784
 OUT_DIM = 10
 N_LAYERS = 3
